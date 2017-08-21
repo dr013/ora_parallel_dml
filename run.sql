@@ -1,13 +1,19 @@
+-- install scripts
+
+@@prl_cursor_type.spec.sql
+@@prl_num_arr.type.sql
+@@prl_run_proc.func.sql
+
 --alter session enable parallel dml;
 alter session force parallel dml parallel 8;
 
 set serveroutput on
 set timing on
 
-SELECT sum(column_value) from table(prl_run_proc(cursor(select /*+ parallel(tt 8) */ id from example_table tt)));
-select ses_id, count(*) from example_table group by ses_id;
+select sum(column_value) from table(prl_run_proc(cursor(select /*+ parallel(tt 8) */ id from example_table tt)));
 
 /*
+select ses_id, count(*) from example_table group by ses_id;
     SES_ID   COUNT(*)
 ---------- ----------
        303        379
