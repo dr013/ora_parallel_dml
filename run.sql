@@ -5,7 +5,7 @@ set serveroutput on
 set timing on
 
 SELECT sum(column_value) from table(prl_run_proc(cursor(select /*+ parallel(tt 8) */ id from example_table tt)));
-select ses_id, count(*) from plz_plan_financial_provision group by ses_id;
+select ses_id, count(*) from example_table group by ses_id;
 
 /*
     SES_ID   COUNT(*)
